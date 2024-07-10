@@ -159,7 +159,34 @@ class Problem:
         """
         Create a problem from a text I/O source `f`
         """
-        raise NotImplementedError
+        # Create empty problem object
+        problem = Problem()
+
+        # Read file contents into string
+        file_contents = f.read().strip()
+
+        # Process string to find number of items N and list of all elements in file
+        elements = []
+        for line in file_contents.split('\n'):
+            line_elements = [int(element) for element in line.split(' ') if element != '']
+            elements.extend(line_elements)
+        n = int(len(elements)/3)
+
+        # Split the list of elements into:
+        #   list processing times p
+        #   list of weights w
+        #   list of due dates d
+        #   and attach as properties as problem object
+        problem.p = []
+        for j in range(n):
+            problem.p.append(elements[j])
+        problem.w = []
+        for j in range(n, 2*n):
+            problem.w.append(elements[j])
+        problem.d = []
+        for j in range(2*n, 3*n):
+            problem.d.append(elements[j])
+        assert len(problem.p) == len(problem.w) == len(problem.d) == n
 
     def empty_solution(self) -> Solution:
         """

@@ -155,6 +155,10 @@ class Solution(list):
         raise NotImplementedError
 
 class Problem:
+    p: tuple
+    w: tuple
+    d: tuple
+
     @classmethod
     def from_textio(cls, f: TextIO) -> Problem:
         """
@@ -178,15 +182,18 @@ class Problem:
         #   list of weights w
         #   list of due dates d
         #   and attach as properties as problem object
-        problem.p = []
+        p = []
         for j in range(n):
-            problem.p.append(elements[j])
-        problem.w = []
+            p.append(elements[j])
+        w = []
         for j in range(n, 2*n):
-            problem.w.append(elements[j])
-        problem.d = []
+            w.append(elements[j])
+        d = []
         for j in range(2*n, 3*n):
-            problem.d.append(elements[j])
+            d.append(elements[j])
+        problem.p = tuple(p)
+        problem.w = tuple(w)
+        problem.d = tuple(d)
         assert len(problem.p) == len(problem.w) == len(problem.d) == n
 
     def empty_solution(self) -> Solution:

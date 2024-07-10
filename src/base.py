@@ -32,7 +32,7 @@ class Component:
 class LocalMove:
     ...
 
-class Solution:
+class Solution(list):
     def output(self) -> str:
         """
         Generate the output string for this solution
@@ -151,6 +151,7 @@ class Solution:
         """
         Returns an iterable to the components of a solution
         """
+        solution = []
         raise NotImplementedError
 
 class Problem:
@@ -192,7 +193,8 @@ class Problem:
         """
         Create an empty solution (i.e. with no components).
         """
-        raise NotImplementedError
+        solution = Solution([])
+        return solution
 
 
 if __name__ == '__main__':
